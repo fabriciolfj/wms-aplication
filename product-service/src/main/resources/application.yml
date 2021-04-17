@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 3
+      idle-timeout: 10000
+    url: jdbc:mysql://localhost:3306/product
+    username: root
+    password: root
+  flyway:
+    locations:
+      - classpath:db/migration
+  jpa:
+    show-sql: false
+    generate-ddl: false
+    properties:
+      hibernate:
+        ddl-auto: validate
+        dialect: org.hibernate.dialect.MySQL57Dialect
