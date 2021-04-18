@@ -7,6 +7,8 @@ import com.github.fabriciolfj.productservice.core.ports.out.CategoryPersistenceO
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import java.lang.RuntimeException
+import java.util.*
 
 @Component
 class CategoryPersistenceAdapter : CategoryPersistenceOut {
@@ -22,6 +24,12 @@ class CategoryPersistenceAdapter : CategoryPersistenceOut {
         val entity = mapper.toEntity(category)
         logger.info("Save category: {}", entity)
         return mapper.toDomain(categoryRepository.save(entity))
+    }
+
+    override fun findCategoryName(name: String): Category {
+        return categoryRepository.findByDescription(name)
+            .map { mapper.toDomain(it) }
+            .orElseThrow { RuntimeException("Category not found, name: $name") }
     }
 
 }

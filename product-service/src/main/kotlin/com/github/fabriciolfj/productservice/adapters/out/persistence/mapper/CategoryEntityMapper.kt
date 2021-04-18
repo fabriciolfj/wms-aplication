@@ -15,5 +15,8 @@ interface CategoryEntityMapper {
     )
     fun toEntity(category: Category) : CategoryEntity
 
+    @Mappings(
+        Mapping(source = "description", target = "name")
+    )
     fun toDomain(categoryEntity: CategoryEntity) : Category
 }

@@ -15,4 +15,10 @@ class CategoryService : CategoryIn {
     override fun save(category: Category): Category {
         return categoryPersistenceOut.save(category)
     }
+
+    override fun findCategory(name: String): Category {
+        return categoryPersistenceOut.findCategoryName(name);
+    }
+
+
 }
