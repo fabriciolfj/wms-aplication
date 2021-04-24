@@ -1,6 +1,8 @@
-# Sistema aws utilizando os patterns de microservices
+# Sistema wms utilizando os patterns de microservices
 - observabilidade
 - fallbacks
 - resilientes
 - rastreabilidade
 - escalonaveis
+- Service discovery (spring admin)
+- webflux (reactor)
