@@ -26,10 +26,10 @@ class CategoryPersistenceAdapter : CategoryPersistenceOut {
         return mapper.toDomain(categoryRepository.save(entity))
     }
 
-    override fun findCategoryName(name: String): Category {
+    override fun findCategoryName(name: String): Category? {
         return categoryRepository.findByDescription(name)
             .map { mapper.toDomain(it) }
-            .orElseThrow { RuntimeException("Category not found, name: $name") }
+            .orElseGet { null }
     }
 
 }

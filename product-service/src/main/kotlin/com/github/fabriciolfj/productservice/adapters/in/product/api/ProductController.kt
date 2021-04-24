@@ -22,7 +22,7 @@ class ProductController {
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@Valid @RequestBody productRequest: ProductRequest) : ProductResponse {
         return productMapper.toDomain(productRequest)
-            .apply { productIn.save(this, productRequest.category, productRequest.imposto) }
+            .apply { productIn.save(this, productRequest.category, productRequest.tributo) }
             .let { productMapper.toResponse(it) }
     }
 }

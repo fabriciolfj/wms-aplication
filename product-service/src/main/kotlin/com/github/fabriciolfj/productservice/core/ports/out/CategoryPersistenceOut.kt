@@ -6,5 +6,5 @@ interface CategoryPersistenceOut {
 
     fun save(category: Category) : Category
 
-    fun findCategoryName(name: String) : Category
+    fun findCategoryName(name: String) : Category?
 }

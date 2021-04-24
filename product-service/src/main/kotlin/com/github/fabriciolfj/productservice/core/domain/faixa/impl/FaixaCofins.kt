@@ -6,6 +6,6 @@ import java.math.BigDecimal
 enum class FaixaCofins : Faixa {
 
     FAIXA {
-        override fun getAliquota() = BigDecimal(0.65)
+        override fun getAliquota() = BigDecimal(7.00)
     };
 }

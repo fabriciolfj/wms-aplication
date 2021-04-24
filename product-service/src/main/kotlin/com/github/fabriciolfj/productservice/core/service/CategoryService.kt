@@ -5,6 +5,7 @@ import com.github.fabriciolfj.productservice.core.ports.`in`.CategoryIn
 import com.github.fabriciolfj.productservice.core.ports.out.CategoryPersistenceOut
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.lang.IllegalArgumentException
 
 @Service
 class CategoryService : CategoryIn {
@@ -13,11 +14,14 @@ class CategoryService : CategoryIn {
     lateinit var categoryPersistenceOut: CategoryPersistenceOut
 
     override fun save(category: Category): Category {
-        return categoryPersistenceOut.save(category)
+        var entity = categoryPersistenceOut.findCategoryName(category.name)
+        entity?: categoryPersistenceOut.save(category)
+        return category;
     }
 
-    override fun findCategory(name: String): Category {
-        return categoryPersistenceOut.findCategoryName(name);
+    override fun findCategory(name: String): Category? {
+        return categoryPersistenceOut.findCategoryName(name)
+            ?: throw IllegalArgumentException("Category not found $name")
     }
 
 

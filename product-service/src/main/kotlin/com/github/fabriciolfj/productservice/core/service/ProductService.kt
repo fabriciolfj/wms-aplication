@@ -7,6 +7,7 @@ import com.github.fabriciolfj.productservice.core.ports.`in`.ProductIn
 import com.github.fabriciolfj.productservice.core.ports.out.ProductPersistenceOut
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.lang.IllegalArgumentException
 import java.util.*
 
 @Service
@@ -24,7 +25,7 @@ class ProductService : ProductIn {
             .apply {
                 this.imposto = calculo.createImposto(TipoCalculo.toEnum(imposto), product.price)
                 this.code = UUID.randomUUID().toString()
-                this.category = categoryService.findCategory(category)
+                this.category = categoryService.findCategory(category) ?: throw IllegalArgumentException("Category not found: $category")
             }
             .let { productPersistenceOut.save(it) }
     }

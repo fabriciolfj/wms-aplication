@@ -6,7 +6,7 @@ import com.github.fabriciolfj.productservice.core.domain.Product
 abstract class ProductMapperDecorated : ProductMapper {
 
     override fun toResponse(product: Product): ProductResponse {
-        return ProductResponse(product.name, product.code, product.category!!.id)
+        return ProductResponse(product.name, product.code, product.category!!.id, product.imposto)
     }
 
 }

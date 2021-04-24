@@ -6,5 +6,5 @@ interface CategoryIn {
 
     fun save(category: Category) : Category
 
-    fun findCategory(name: String) : Category
+    fun findCategory(name: String) : Category?
 }
