@@ -27,6 +27,6 @@ class ProductService : ProductIn {
                 this.code = UUID.randomUUID().toString()
                 this.category = categoryService.findCategory(category) ?: throw IllegalArgumentException("Category not found: $category")
             }
-            .let { productPersistenceOut.save(it) }
+            .apply { productPersistenceOut.save(this) }
     }
 }
