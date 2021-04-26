@@ -6,3 +6,4 @@
 - escalonaveis
 - Service discovery (spring admin)
 - webflux (reactor)
+- quarkus e micronaut
