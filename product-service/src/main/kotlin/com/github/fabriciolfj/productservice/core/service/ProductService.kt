@@ -29,4 +29,12 @@ class ProductService : ProductIn {
             }
             .apply { productPersistenceOut.save(this) }
     }
+
+    override fun findProduct(code: String): Product {
+        return productPersistenceOut.findByCode(code)
+    }
+
+    override fun listProductCategory(name: String): List<Product> {
+        return categoryService.findProducts(name)
+    }
 }

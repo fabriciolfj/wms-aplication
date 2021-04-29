@@ -5,4 +5,5 @@ import com.github.fabriciolfj.productservice.core.domain.Product
 interface ProductPersistenceOut {
 
     fun save(product: Product) : Product
+    fun findByCode(code: String) : Product
 }
