@@ -3,6 +3,7 @@ package com.github.fabriciolfj.productservice.core.exceptions
 import com.fasterxml.jackson.databind.JsonMappingException
 import com.fasterxml.jackson.databind.exc.InvalidFormatException
 import com.fasterxml.jackson.databind.exc.PropertyBindingException
+import com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException
 import com.github.fabriciolfj.productservice.core.exceptions.dto.ErrosDTO
 import com.github.fabriciolfj.productservice.core.exceptions.dto.Problem
 import org.apache.commons.lang3.exception.ExceptionUtils
@@ -34,7 +35,7 @@ class ApiException : ResponseEntityExceptionHandler() {
         status: HttpStatus,
         request: WebRequest
     ): ResponseEntity<Any> {
-        return handleValidationInternal(ex, ex.bindingResult, headers, status, request)
+        return this.handleValidationInternal(ex, ex.bindingResult, headers, status, request)
     }
 
     @ExceptionHandler(ProductNotFoundException::class)
@@ -87,7 +88,7 @@ class ApiException : ResponseEntityExceptionHandler() {
                     val message = messageSource.getMessage(it, LocaleContextHolder.getLocale())
                     var name = "indefinido"
                     if (it is FieldError) {
-                        name = (it.objectName as? FieldError)!!.field
+                        name = it.field
                     }
 
                     ErrosDTO(name, message)
