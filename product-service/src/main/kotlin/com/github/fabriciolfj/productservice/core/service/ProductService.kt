@@ -25,7 +25,7 @@ class ProductService : ProductIn {
     override fun save(product: Product, category: String, imposto: String) : Product {
         return product
             .apply {
-                this.imposto = calculo.createImposto(getCalculo(imposto), product.price)
+                this.imposto = calculo.createImposto(EnumTipo.toTipo(imposto), product.price)
                 this.code = UUID.randomUUID().toString()
                 this.category = categoryService.findCategory(category) ?: throw IllegalArgumentException("Category not found: $category")
             }
@@ -38,12 +38,5 @@ class ProductService : ProductIn {
 
     override fun listProductCategory(name: String): List<Product> {
         return categoryService.findProducts(name)
-    }
-
-    private fun getCalculo(imposto: String) : TipoCalculo {
-        val name = EnumTipo.toEnum(imposto).clazz
-        val clazz = Class.forName("com.github.fabriciolfj.productservice.core.domain.calculo.tipoImpostos.$name").kotlin
-        var result = clazz.createInstance()
-        return result as TipoCalculo
     }
 }
