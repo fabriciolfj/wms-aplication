@@ -1,14 +1,8 @@
 package com.github.fabriciolfj.productservice.core.domain.calculo
 
-enum class TipoCalculo(val descricao: String) {
+import java.math.BigDecimal
 
-    TRIBUTADO("tributado"),
-    ISENTOPISCOFINS("isentopiscofins"),
-    TRIBUTADOCOFINSISENTO("tributadocofinsisento");
+interface TipoCalculo {
 
-    companion object {
-        fun toEnum(descricao: String) : TipoCalculo {
-            return values().first { it.descricao == descricao }
-        }
-    }
+    fun calcular(base: BigDecimal): BigDecimal
 }
